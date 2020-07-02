@@ -1,14 +1,18 @@
+const Engine = Matter.Engine;
+const World= Matter.World;
+const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint;
 
-
+var engine, world;
 var gamestate = "ONSLING" 
 
 function setup() {
-  createCanvas(800,400);
-}
+  createCanvas(800,400); 
+ 
+  engine = Engine.create();
+  world = engine.world;
+ 
 
-function draw() {
-  background(255,255,255);  
-  
   box1=new box (330,235,30,40)
   box2= new box(360,235,30,40)
   box3=new box(390,235,30,40)
@@ -19,23 +23,47 @@ function draw() {
   box8=new box(420,195,30,40)
   box9=new box(390,155,30,40)
 
- polygon= Bodies.circle(50,200,20); 
- World.add(world,polygon);
+ polygon1 = new polygon(150,150,20);
+  
+  sling = new SlingShot(this.polygon,{x:100,y:200})  
 
- sling = new SlingShot(this.polygon,{x:100,y:200}) 
+  ground= new Ground(200,790,800,80)
+}
+
+function draw() {
+  background(255,255,255);  
+  
+  Engine.update(engine);
+  box1.display();
+  box2.display();
+  box3.display();
+  box4.display();
+  box5.display();
+  box6.display();
+  box7.display();
+  box8.display();
+  box9.display(); 
+
+  polygon.display(); 
+
+  sling.display(); 
+
+  ground.display();
+
+
+ 
 
 
   drawSprites();
 } 
 function mouseDragged(){
-  if(gamestate!== "launched"){
-  Matter.Body.setPosition(polygon.body, {x: mouseX , y: mouseY});
-  }
+  if (gameState!=="launched"){
+       Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+   }
 }
 
 
 function mouseReleased(){
-
-  sling.fly();
-  gamestate="launched"  
+   sling.fly();
+   gameState = "launched";
 }
