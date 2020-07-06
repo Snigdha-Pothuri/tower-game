@@ -4,7 +4,7 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var engine, world;
-var gamestate = "ONSLING" 
+var gameState = "ONSLING" 
 
 function setup() {
   createCanvas(800,400); 
@@ -17,7 +17,7 @@ function setup() {
   box2= new Box(360,235,30,40)
   box3=new Box(390,235,30,40)
   box4=new Box(420,235,30,40)
-  box5=new Box(450,235,30,40)
+  box5=new Box(450,235,30,40) 
   box6=new Box(360,195,30,40)
   box7=new Box(390,195,30,40)
   box8=new Box(420,195,30,40)
@@ -25,15 +25,18 @@ function setup() {
 
  polygon1 = new polygon(150,150,20);
   
- sling = new SlingShot(polygon1.body,{x:100,y:200})
+ slingshot = new SlingShot(polygon1.body,{x:200, y:200});
 
-  ground= new Ground(200,790,800,80)
+  ground= new Ground(200,395,800,50)
 }
 
 function draw() {
   background(255,255,255);  
   
-  Engine.update(engine);
+  Engine.update(engine); 
+
+ 
+
   box1.display();
   box2.display();
   box3.display();
@@ -46,7 +49,7 @@ function draw() {
 
   polygon1.display(); 
 
-  sling.display(); 
+  slingshot.display(); 
 
   ground.display();
 
@@ -64,6 +67,6 @@ function mouseDragged(){
 
 
 function mouseReleased(){
-   sling.fly();
+   slingshot.fly();
    gameState = "launched";
 }
